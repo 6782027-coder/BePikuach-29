@@ -20,13 +20,12 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Grant execute permission for gradlew
-        run: find . -name "gradlew" -exec chmod +x {} \;
-
       - name: Build with Gradle
         run: |
-          GRADLEW=$(find . -name "gradlew" | head -1)
-          cd $(dirname $GRADLEW)
+          GRADLEW=$(find $GITHUB_WORKSPACE -name "gradlew" -type f | head -1)
+          echo "Found: $GRADLEW"
+          chmod +x "$GRADLEW"
+          cd "$(dirname $GRADLEW)"
           ./gradlew assembleDebug
 
       - name: Upload APK
