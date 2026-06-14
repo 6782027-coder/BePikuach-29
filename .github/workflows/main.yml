@@ -23,6 +23,10 @@ jobs:
       - name: Build with Gradle
         working-directory: BePikuach_v3
         run: |
+          if [ ! -f "gradlew" ]; then
+            echo "gradlew not found in BePikuach_v3 directory!"
+            exit 1
+          fi
           chmod +x gradlew
           ./gradlew assembleDebug
 
