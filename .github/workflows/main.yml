@@ -20,18 +20,15 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Make gradlew executable
+        run: chmod +x BePikuach_v3/gradlew
+
       - name: Build with Gradle
         working-directory: BePikuach_v3
-        run: |
-          if [ ! -f "gradlew" ]; then
-            echo "gradlew not found in BePikuach_v3 directory!"
-            exit 1
-          fi
-          chmod +x gradlew
-          ./gradlew assembleDebug
+        run: ./gradlew assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: BePikuach-debug-apk
-          path: "**/app/build/outputs/apk/debug/app-debug.apk"
+          path: "**/app/build/outputs/apk/debug/app-debug.apk"2
